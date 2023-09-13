@@ -7,20 +7,14 @@ body {
 }
 
 /* ALL NAV SHOULD BE IN FRONT */
-.nav {
-    z-index: 1000000 !important;
-}
+
 
 /* ======================= */
 /* BEGIN TOP PAGE TOP INFO NAV STYLE */
 .top-info-menu {
     position: fixed;
     background: #223237;
-    float: left;
-    left: 100px;
-    width: 100%;
-    height: 79px !important;
-    z-index: 1000000 !important;
+    width: 5%;
 }
 
 /* END TOP PAGE TOP INFO NAV STYLE */
@@ -28,27 +22,20 @@ body {
 
 /* ======================= */
 /* BEGIN VERTICAL MENU STYLE */
+
 .main-menu {
-    position: fixed;
-    float: left;
-    width: 100px;
-    display: block;
-    height: 100% !important;
-    background: #1D2C30;
     overflow-x: auto;
+    background: #1D2C30;
 }
 
+/*#1d301d looks nice*/
 .main-menu li {
-    display: inline-table;
     text-align: center;
-    width: 100px;
-    background: #1D2C30;
+    background: #1D2C30;    
 }
 
 .main-menu li a p {
-    margin-bottom: 10px !important;
-    padding-right: 5px;
-    padding-left: 5px;
+    margin-bottom: 5px;
 }
 
 .main-menu li a:hover {
@@ -59,8 +46,6 @@ body {
 .main-menu li a {
     color: white;
     border-bottom: 5px solid transparent;
-    padding: 10px 0px 0px 0px;
-    bottom: 0 !important;
     font-size: 10px;
     text-transform: uppercase;
     text-decoration: none;
@@ -80,20 +65,11 @@ body {
 /* ======================= */
 
 /* ======================= */
-/* BEGIN Header buttons Wallet and network */
-.options-in-the-header {
-    position: fixed;
-    float: left;
-    right: 0;
-    top: 0;
-    padding: 10px 70px 0 0;
-    z-index: 2000000 !important;
-}
+
 
 .spanHeader {
     font-size: 15px;
     background: #00AF92;
-    padding: 2px;
 }
 
 /* END Header buttons Wallet and network */
@@ -103,10 +79,6 @@ body {
 /* Begin Navigation tab style */
 .aceLITabs {
     background-color: #223237 !important;
-    float: left;
-    position: relative !important;
-    z-index: 0 !important;
-    width: 100%;
     /*    height: 45px!important; */
     /*    max-height: 35px!important;*/
 }
@@ -115,7 +87,6 @@ body {
     background: #09af92 !important;
     color: white !important;
     text-align: center !important;
-    float: left;
     width: 10%;
     padding-top: 0.4% !important;
     padding-bottom: 0.4% !important;
@@ -166,14 +137,10 @@ body {
 
 .standardContainer {
     background: #223237;
-    margin-top: 20px;
-    float: left;
-    width: 100%;
-    padding: 0px;
 }
 
 .standardContainer label {
-    font-size: 13px !important;
+    font-size: 13px;
 }
 
 .standardContainer input {
@@ -205,18 +172,13 @@ body {
 }
 
 .generalContainer {
-    margin-top: 15px;
+    /*margin-top: 15px;*/
     color: white;
 }
 
 .green-title {
-    float: left;
-    width: 100%;
     background: #747287;
     color: white;
-    position: relative;
-    top: 0;
-    left: 0;
     padding: 10px 10px 10px 30px;
     font-size: 16px;
 }
@@ -410,11 +372,15 @@ textarea:focus {
 /* this is due to bootstrap 5.3 */
 .table thead td,
 .table tbody td {
-    border-top: transparent !important;
+    border-top: transparent;
+}
+
+.table td:hover{
+    background-color:  #0aab7b;
 }
 
 .twalllet td {
-    border-top: 1px solid #0aab7b !important;
+    border-top: 1px solid #0aab7b;
 }
 
 .form-control:disabled,
@@ -457,13 +423,7 @@ textarea:focus {
 
 /* BEGIN ACE */
 #aceEditor {
-    position: relative;
     margin-top: 0px;
-    margin-bottom: 15px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    float: left;
     width: 100%;
     height: 350px;
     border-top: 8px solid #00AF92;

@@ -14,9 +14,9 @@ function goToTabAndClick(tabToGo) {
         return;
     }
 
-    $('.nav a[href="#' + tabToGo + '"]').tab('show');
+    $('.navbar-nav a[href="#' + tabToGo + '"]').tab('show');
     // Simulate on click event as well
-    $('.nav a[href="#' + tabToGo + '"]')[0].onclick();
+    $('.navbar-nav a[href="#' + tabToGo + '"]')[0].onclick();
 }
 
 $(document).ready(() => {

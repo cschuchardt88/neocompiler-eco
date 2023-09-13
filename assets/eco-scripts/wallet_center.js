@@ -14,16 +14,18 @@ function drawWalletsStatus() {
     var headersUnclaimed = document.createElement('th');
     var headersAddress = document.createElement('th');
 
+    headersLabel.setAttribute('scope', 'col');
+
     headersLabel.innerHTML = "<b><center><font size='1'>LABEL</font></b>";
-    headerRow.insertCell(-1).appendChild(headersLabel);
+    headerRow.appendChild(headersLabel);
     headersAddress.innerHTML = "<b><center><font size='1'>SELECT ADDRESS</font></b>";
-    headerRow.insertCell(-1).appendChild(headersAddress);
+    headerRow.appendChild(headersAddress);
     headersNeoBalance.innerHTML = "<b><center><font size='1'>NEO</font></b>";
-    headerRow.insertCell(-1).appendChild(headersNeoBalance);
+    headerRow.appendChild(headersNeoBalance);
     headersGasBalance.innerHTML = "<b><center><font size='1'>GAS</font></b>";
-    headerRow.insertCell(-1).appendChild(headersGasBalance);
+    headerRow.appendChild(headersGasBalance);
     headersUnclaimed.innerHTML = "<b><center><font size='1'>UNCLAIMED</font></b>";
-    headerRow.insertCell(-1).appendChild(headersUnclaimed);
+    headerRow.appendChild(headersUnclaimed);
 
     tHeadElement.appendChild(headerRow);
 

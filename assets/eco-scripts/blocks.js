@@ -133,7 +133,7 @@ function drawBlocks(automatic = false) {
             PROGRESS.c++;
             var percentageComplete = Math.round(Math.min(100, PROGRESS.c / PROGRESS.count * 100));
             $("#progressBarBlocks")[0].style.width = percentageComplete + "%";
-            $("#progressBarBlocksText").html(percentageComplete + "% complete");
+            //$("#progressBarBlocksText").html(percentageComplete + "% complete");
 
             if (resultBlock.error)
                 if (resultBlock.error.code === -100) {

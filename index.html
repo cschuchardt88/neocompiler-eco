@@ -4,6 +4,7 @@
 <head>
     <title>Neo Compiler - Compiling & Testing</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="NeoCompiler" content="A set of tools for developing and testing smart contracts on Neo blockchain.">
     <meta name="author" content="NeoResearch">
     <meta property="og:title" content="Neo Compiler - Compiling & Testing" />
@@ -42,132 +43,135 @@
         </div>
     </div>
 
+    <nav class="navbar navbar-expand-sm navbar-dark mb-4 main-menu" role="tablist">
+        <div class="container-fluid">
+            <a class="navbar-brand">
+                <img src="assets/neocompiler.png" style="height: 65px;">
+            </a>
 
-    <!-- TOP INFO MENU -->
-    <ul class="nav top-info-menu">
-        <li class="nav-item text-white" style="width: 300px; padding-left: 10px;padding-top: 3px;">
-            <div>
-                <span id="nodeURL" class="label label-info spanHeader">
-                    <i class="fas fa-lg fa-spinner"></i></span>
-            </div>
-            <div>
-                <span id="nodeVersion" class="label label-info spanHeader">
-                    <i class="fas fa-lg fa-spinner"></i></span>
-            </div>
-            <div>
-                <span id="nodeHeight" class="label label-info spanHeader">
-                    <i class="fas fa-lg fa-spinner"></i></span>
-            </div>
-            <!--<div class="">
-                <span id="online" class="label label-success"
-                    style="font-size: 16px;background: #00AF92;padding:2px;"><i class="fas fa-lg fa-spinner"></i></span>
-            </div>-->
-        </li>
-    </ul>
-    <!-- TOP INFO MENU -->
+            <div class="row" style="height: 65px; width: 300px;">
+                <div class="col">
+                    <span id="nodeURL" class="label label-info spanHeader">
+                        <i class="fas fa-lg fa-spinner"></i></span>
 
-    <!-- BEGIN SELECTION OF NETWORK AND WALLET PROVIDER -->
-    <div class="options-in-the-header">
-        <div class="row">
-            <div class="col-7">
-                <select id="ecolabnetworkurlselection" onchange="changeToSelectedNetwork()" title="Select network"
-                    class="form-select" style="text-align: center!important;">
-                    <option selected>Personalized</option>
-                    <option>Localhost</option>
-                    <option>TestNet</option>
-                    <option>MainNet</option>
-                </select>
+                    <span id="nodeVersion" class="label label-info spanHeader">
+                        <i class="fas fa-lg fa-spinner"></i></span>
+
+
+                    <span id="nodeHeight" class="label label-info spanHeader">
+                        <i class="fas fa-lg fa-spinner"></i></span>
+                </div>
             </div>
-            <div class="col-5">
-                <button type="button" id="button-connect-wallet" onClick="connectWallet()" class="btn btn-default btn-1"
-                    style="width: 200px;font-weight: bold!important;">CONNECT
-                    WALLET
-                </button>
+
+            <button class="navbar-toggler" style="margin-bottom: 5px;" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" data-bs-toggle="tab" data-toggle="tab"
+                            onclick="$('#navbarCollapse').collapse('hide')" href="#nav-compilers" role="tab"
+                            aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/compilers.png" style="width: 35px;">
+                            <p id="compilerNav">Compilers</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-toggle="tab"
+                            onclick="getNativeInfo(); updateWithDeployedContract(); $('#navbarCollapse').collapse('hide')"
+                            href="#nav-contracts" role="tab" aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/contracts.png" style="width: 35px;">
+                            <p>Contracts</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" data-toggle="tab"
+                            onclick="populateAllWalletData(); $('#navbarCollapse').collapse('hide')" href="#nav-wallet"
+                            role="tab" aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/walet.png" style="width: 35px;">
+                            <p>Wallet</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#nav-rpc"
+                            onclick="$('#navbarCollapse').collapse('hide')" data-bs-toggle="tab" role="tab"
+                            aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/raw.png" style="width: 35px;">
+                            <p>Raw RPC</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" data-toggle="tab"
+                            onclick="drawRelayedTXs(); drawBlocks(true); $('#navbarCollapse').collapse('hide')"
+                            href="#nav-activity" role="tab" aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/activty.png" style="width: 35px;">
+                            <p>Activity</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="$('#navbarCollapse').collapse('hide')" data-bs-toggle="tab"
+                            data-toggle="tab" href="#nav-conversors" role="tab" aria-controls="nav-home"
+                            aria-selected="true">
+                            <img src="./assets/icons/conversus.png" style="width: 35px;">
+                            <p>Conversors</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="navItem-network">
+                        <a class="nav-link" data-bs-toggle="tab" data-toggle="tab"
+                            onclick="getNodeInfo(); getOracleInfo(); getStateInfo();$('#navbarCollapse').collapse('hide')"
+                            href="#nav-network" role="tab" aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/consensus.png" style="width: 35px;">
+                            <p>Network</p>
+                        </a>
+                    </li>
+                    <li class="nav-config" role="presentation">
+                        <a class="nav-link" data-bs-toggle="tab" data-toggle="tab"
+                            onclick="$('#navbarCollapse').collapse('hide')" href="#nav-config" role="tab"
+                            aria-controls="nav-home" aria-selected="true">
+                            <img src="./assets/icons/settings.png" style="width: 35px;">
+                            <p>Config</p>
+                        </a>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-5">
+                        <select id="ecolabnetworkurlselection" onchange="changeToSelectedNetwork(); $('#navbarCollapse').collapse('hide')"
+                            title="Select network" class="form-select" style="text-align: center!important;">
+                            <option selected>Personalized</option>
+                            <option>Localhost</option>
+                            <option>TestNet</option>
+                            <option>MainNet</option>
+                        </select>
+                    </div>
+                    <div class="col-7">
+                        <button type="button" id="button-connect-wallet" onClick="connectWallet(); $('#navbarCollapse').collapse('hide')"
+                            class="btn btn-default btn-1" style="font-weight: bold!important;">CONNECT
+                            WALLET
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </nav>
+
     <!-- END SELECTION OF NETWORK AND WALLET PROVIDER -->
 
     <!-- BEGIN UL FOR NAV MENU VERTICAL -->
-    <ul class="nav main-menu" role="tablist">
-        <li class="nav-item noHoverLogoNeoCompiler" style="border-bottom: 0px !important; 
-        padding-left: 16% !important; padding-right: 16% !important; height: 79px;">
-            <a class="nav-link" style="padding-top: 0px">
-                <img src="assets/neocompiler.png" style="height: 74px;">
-            </a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" onclick="" data-bs-toggle="tab" data-toggle="tab" href="#nav-compilers"
-                role="tab" aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/compilers.png" style="width: 35px; padding-bottom: 4px;">
-                <p id="compilerNav">Compilers</p>
-            </a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" data-toggle="tab"
-                onclick="getNativeInfo(); updateWithDeployedContract();" href="#nav-contracts" role="tab"
-                aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/contracts.png" style="width: 35px; padding-bottom: 4px;">
-                <p>Contracts</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" onclick="populateAllWalletData()" data-bs-toggle="tab" data-toggle="tab"
-                href="#nav-wallet" role="tab" aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/walet.png" style="width: 35px;padding-bottom: 4px;">
-                <p>Wallet</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" onclick="" data-bs-toggle="tab" data-toggle="tab" href="#nav-rpc" role="tab"
-                aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/raw.png" style="width: 35px;padding-bottom: 4px;">
-                <p>Raw RPC</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" onclick="drawRelayedTXs(); drawBlocks(true);" data-bs-toggle="tab" data-toggle="tab"
-                href="#nav-activity" role="tab" aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/activty.png" style="width: 35px;padding-bottom: 4px;">
-                <p>Activity</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" onclick="" data-bs-toggle="tab" data-toggle="tab" href="#nav-conversors" role="tab"
-                aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/conversus.png" style="width: 35px;padding-bottom: 4px;">
-                <p>Conversors</p>
-            </a>
-        </li>
-        <li class="nav-item" id="navItem-network">
-            <a class="nav-link" data-bs-toggle="tab" data-toggle="tab" href="#nav-network"
-                onclick="getNodeInfo(); getOracleInfo(); getStateInfo()" role="tab" aria-controls="nav-home"
-                aria-selected="true">
-                <img src="./assets/icons/consensus.png" style="width: 35px;padding-bottom: 4px;">
-                <p>Network</p>
-            </a>
-        </li>
-        <li class="nav-config" role="presentation">
-            <a class="nav-link" data-bs-toggle="tab" data-toggle="tab" onclick="" href="#nav-config" role="tab"
-                aria-controls="nav-home" aria-selected="true">
-                <img src="./assets/icons/settings.png" style="width: 35px;padding-bottom: 4px;">
-                <p>Config</p>
-            </a>
-        </li>
-    </ul>
+
     <!-- END UL FOR NAV MENU VERTICAL -->
 
     <!-- END HEADER AREA -->
 
     <!-- BEGIN SINGLE PAGE CONTAINER PRINCIPAL -->
-    <div class="container">
+    <div class="container-fluid">
         <!-- tab-content for the nav-panel -->
         <div class="tab-content">
-            <!-- SPACING ON THE LATERAL SIDE -->
-            <br><br><br>
 
             <!-- BEGIN TAB-PANE COMPILERS -->
             <div class="tab-pane fade show active" id="nav-compilers" role="tabpanel">
+
                 <nav class="nav-links" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item active" aria-current="page"><a><i class="fas fa-home"></i></a>
@@ -179,60 +183,57 @@
                     </ol>
                 </nav>
 
-                <div class="container">
-                    <div class="row mb-2">
-                        <div class="col-md-8">
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <select id="codesend_selected_compiler" class="form-select"
-                                        onchange="setCompilerAndExample()"
-                                        style="text-align: center!important;font-weight: bold!important;">
-                                        <option selected>C#</option>
-                                        <option>Python</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <select title="Select compiler version" id="compilers_versions-selection-box"
-                                        class="form-select"
-                                        style="text-align: center!important;font-weight: bold!important;">
-                                        <option title="Loading compilers">Loading...</option>
-                                    </select>
-                                </div>
+                <div class="row mb-2">
+                    <div class="col-md-8">
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <select id="codesend_selected_compiler" class="form-select"
+                                    onchange="setCompilerAndExample()"
+                                    style="text-align: center!important;font-weight: bold!important;">
+                                    <option selected>C#</option>
+                                    <option>Python</option>
+                                </select>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-md-4">
-                                    <button type="button" id="compilebtn" onClick="compilerCall()"
-                                        style="text-align: center!important;font-weight: bold!important; width: 100%;"
-                                        class="btn btn-default btn-1 btn-1-darker"><i class="fas fa-hammer"></i> COMPILE
-                                    </button>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" id="deleteContractBtn" onClick="askForDeletingContract()"
-                                        style="text-align: center!important;font-weight: bold!important; width: 100%;"
-                                        class="btn btn-default btn-1 btn-1-darker"><i class="fa-solid fa-trash"></i>
-                                        Delete
-                                    </button>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" id="saveContractBtn" onClick="askForSavingContracts(false)"
-                                        style="text-align: center!important;font-weight: bold!important; width: 100%;"
-                                        class="btn btn-default btn-1 btn-1-darker"><i
-                                            class="fa-solid fa-floppy-disk"></i>
-                                        Save
-                                    </button>
-                                </div>
+                            <div class="col-md-6">
+                                <select title="Select compiler version" id="compilers_versions-selection-box"
+                                    class="form-select"
+                                    style="text-align: center!important;font-weight: bold!important;">
+                                    <option title="Loading compilers">Loading...</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <select class="form-select checkedOption"
-                                style="text-align: center!important;font-weight: bold!important;"
-                                onchange="setExampleOnChange()" size="3" id="ExampleList">
-                            </select>
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <button type="button" id="compilebtn" onClick="compilerCall()"
+                                    style="text-align: center!important;font-weight: bold!important; width: 100%;"
+                                    class="btn btn-default btn-1 btn-1-darker"><i class="fas fa-hammer"></i> COMPILE
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" id="deleteContractBtn" onClick="askForDeletingContract()"
+                                    style="text-align: center!important;font-weight: bold!important; width: 100%;"
+                                    class="btn btn-default btn-1 btn-1-darker"><i class="fa-solid fa-trash"></i>
+                                    Delete
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" id="saveContractBtn" onClick="askForSavingContracts(false)"
+                                    style="text-align: center!important;font-weight: bold!important; width: 100%;"
+                                    class="btn btn-default btn-1 btn-1-darker"><i class="fa-solid fa-floppy-disk"></i>
+                                    Save
+                                </button>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select checkedOption"
+                            style="text-align: center!important;font-weight: bold!important;"
+                            onchange="setExampleOnChange()" size="3" id="ExampleList">
+                        </select>
                     </div>
                 </div>
 
-                <ul class="nav nav-tabs aceLITabs" id="navFiles">
+                <ul class="nav nav-tabs aceLITabs">
                     <li role="presentation" class="active"><a href="#nav-compilers/" onclick="goToMainTab()"
                             id="mainTabAceEditor">Main.cs</a></li>
                     <li role="presentation" id="addTabIcon" onclick="Editor.addNewTab()"><a href="#nav-compilers/"><i
@@ -349,124 +350,117 @@
                         <h4 class="green-title">
                             Contracts
                         </h4>
-                        <div class="container">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="contract_hash">Contract ScriptHash</label>
-                                        <input id="contract_hash" name="contract_hash" readonly class="form-control"
-                                            placeholder="Script Hash">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="contract_name">Name</label>
-                                        <input id="contract_name" name="contract_name" readonly class="form-control"
-                                            placeholder="Contract name">
-                                    </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contract_hash">Contract ScriptHash</label>
+                                    <input id="contract_hash" name="contract_hash" readonly class="form-control"
+                                        placeholder="Script Hash">
                                 </div>
                             </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <input id="storage_key" name="storage_key" class="form-control"
-                                        placeholder="Storage Key" style="width: 100%;">
-                                </div>
-                                <div class="col-md-6">
-                                    <button type="button" id="btnGetStorage" style="width: 100%;" onClick="getStorage()"
-                                        class="btn btn-success btn-1"><i class="fas fa-file-contract"></i> Get
-                                        Storage</button>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3 collapse" id="collapseLocalContractsOptions">
-                                <div class="col-md-4">
-                                    <button type="button" id="btnNewContractDeloy" onClick="deployContract()"
-                                        class="btn btn-success btn-1-noColor"><i class="fas fa-file-contract"></i>
-                                        Deploy Contract</button>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" id="btnNewContractToWallet"
-                                        onClick="addContractToWallet($('#contract_hash').val())"
-                                        class="btn btn-success btn-1-noColor"><i class="fas fa-wallet"></i>
-                                        Import to
-                                        wallet</button>
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" id="btnRemoveLocalContract" onClick="deleteLocalContract()"
-                                        class="btn btn-danger btn-1-noColor"><i class="fas fa-trash"></i>
-                                        Remove
-                                        local contract</button>
-                                </div>
-                            </div>
-
-
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <label>Native Contracts</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Local
-                                        Contracts
-                                    </label>
-                                    <button type="button" id="button-refreshWithPendingContracts"
-                                        onclick="updateWithDeployedContract()" class="btn btn-1 btn-sm">
-                                        Pending Contracts: 0 <i class="fas fa-sync-alt"></i></button>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <select id="native_contracts" name="native_contracts"
-                                            onchange="createNativeManifest()" class="form-select" size="8"></select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <select id="local_contracts" name="local_contracts"
-                                            onchange="createLocalManifest()" class="form-select" size="8"></select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2 collapse" id="hidden_notification_contracts">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="notification_contracts">Additional Notification
-                                            Contracts</label>
-                                        <select id="notification_contracts" name="notification_contracts"
-                                            onchange="createNotificationManifest()" class="form-select"
-                                            size="8"></select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="native_methods">ABI Methods</label>
-                                        <select onchange="drawParametersTable()" id="contract_methods"
-                                            class="form-select" size="8"></select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <table id="tableNativeParameters" class="table text-white twalllet">
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <button type="button" style="width: 100%;" onclick="invokeFunction()"
-                                        class="btn btn-1"><i class="fas fa-cubes"></i>
-                                        InvokeFunction </button>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="contract_name">Name</label>
+                                    <input id="contract_name" name="contract_name" readonly class="form-control"
+                                        placeholder="Contract name">
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <input id="storage_key" name="storage_key" class="form-control"
+                                    placeholder="Storage Key" style="width: 100%;">
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" id="btnGetStorage" style="width: 100%;" onClick="getStorage()"
+                                    class="btn btn-success btn-1"><i class="fas fa-file-contract"></i> Get
+                                    Storage</button>
+                            </div>
+                        </div>
+                        <div class="row mb-3 collapse" id="collapseLocalContractsOptions">
+                            <div class="col-md-4">
+                                <button type="button" id="btnNewContractDeloy" onClick="deployContract()"
+                                    class="btn btn-success btn-1-noColor"><i class="fas fa-file-contract"></i>
+                                    Deploy Contract</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" id="btnNewContractToWallet"
+                                    onClick="addContractToWallet($('#contract_hash').val())"
+                                    class="btn btn-success btn-1-noColor"><i class="fas fa-wallet"></i>
+                                    Import to
+                                    wallet</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" id="btnRemoveLocalContract" onClick="deleteLocalContract()"
+                                    class="btn btn-danger btn-1-noColor"><i class="fas fa-trash"></i>
+                                    Remove
+                                    local contract</button>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <label>Native Contracts</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Local
+                                    Contracts
+                                </label>
+                                <button type="button" id="button-refreshWithPendingContracts"
+                                    onclick="updateWithDeployedContract()" class="btn btn-1 btn-sm">
+                                    Pending Contracts: 0 <i class="fas fa-sync-alt"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="native_contracts" name="native_contracts"
+                                        onchange="createNativeManifest()" class="form-select" size="8"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <select id="local_contracts" name="local_contracts" onchange="createLocalManifest()"
+                                        class="form-select" size="8"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2 collapse" id="hidden_notification_contracts">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="notification_contracts">Additional Notification
+                                        Contracts</label>
+                                    <select id="notification_contracts" name="notification_contracts"
+                                        onchange="createNotificationManifest()" class="form-select" size="8"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="native_methods">ABI Methods</label>
+                                    <select onchange="drawParametersTable()" id="contract_methods" class="form-select"
+                                        size="8"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="tableNativeParameters" class="table text-white twalllet">
+                            </table>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <button type="button" style="width: 100%;" onclick="invokeFunction()"
+                                    class="btn btn-1"><i class="fas fa-cubes"></i>
+                                    InvokeFunction </button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -475,17 +469,15 @@
                         <h4 class="green-title">
                             Import Contract
                         </h4>
-                        <div class="container">
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <button id="import_contract_hash_button" type="button" onclick="saveLocalContract()"
-                                        style="width: 100%;" class="btn btn-1"><i class="fas fa-file-contract"></i> Save
-                                        contract</button>
-                                </div>
-                                <div class="col-md-6">
-                                    <input id="import_contract_hash" name="import_contract_hash" class="form-control"
-                                        placeholder="Insert contract script hash">
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <button id="import_contract_hash_button" type="button" onclick="saveLocalContract()"
+                                    style="width: 100%;" class="btn btn-1"><i class="fas fa-file-contract"></i> Save
+                                    contract</button>
+                            </div>
+                            <div class="col-md-6">
+                                <input id="import_contract_hash" name="import_contract_hash" class="form-control"
+                                    placeholder="Insert contract script hash">
                             </div>
                         </div>
                     </div>
@@ -505,234 +497,232 @@
                 <div class="generalContainer">
                     <div class="standardContainer" style="margin-bottom: 30px;">
                         <h4 class="green-title">Request from Neo C# nodes (RPC-JSON API)</h4>
-                        <div class="container">
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="rpcMethod">
-                                            Method (view <a href="https://docs.neo.org/en-us/node/cli/apigen.html"
-                                                target="_blank">Official API</a> or put cursor on top for
-                                            tooltip)</label>
-                                        <select name="rpcMethod" id="rpcMethod" class="form-select"
-                                            onchange="frmRPCJson()">
-                                            <option title="select">Select a method</option>
-                                            <option title=":Gets the number of blocks in the main chain">
-                                                getblockcount
-                                            </option>
-                                            <option title="<script_hash> :	Get Balance of Nep17">
-                                                getnep17balances
-                                            </option>
-                                            <option
-                                                title="<address> :	Export the private key of the specified address (Need to open the wallet)">
-                                                dumpprivkey
-                                            </option>
-                                            <option
-                                                title="<address> :	Check account asset information according to account address">
-                                                getaccountstate
-                                            </option>
-                                            <option
-                                                title="<txid>[verbose=0]: Returns the contract log based on the specified txid (Need to enable logging plugin)">
-                                                getapplicationlog
-                                            </option>
-                                            <option
-                                                title="<asset_id> :	Query asset information according to the specified asset number">
-                                                getassetstate
-                                            </option>
-                                            <option
-                                                title="<asset_id> : Returns the balance of the corresponding asset in the wallet according to the specified asset number (Need to open the wallet)">
-                                                getbalance
-                                            </option>
-                                            <option title=": Gets the hash of the tallest block in the main chain">
-                                                getbestblockhash
-                                            </option>
-                                            <option
-                                                title="<hash> [verbose=0]:	Returns the corresponding block information according to the specified hash value">
-                                                getblock
-                                            </option>
-                                            <option
-                                                title="<index> [verbose=0]: 	Returns the corresponding block information according to the specified index">
-                                                getblock
-                                            </option>
-                                            <option
-                                                title="<index>: 	Returns the hash value of the corresponding block based on the specified index">
-                                                getblockhash
-                                            </option>
-                                            <option title="<index>:[verbose=0] 	Returns header">GetBlockHeader
-                                            </option>
-                                            <option
-                                                title="<index>: 	Returns the system fees before the block according to the specified index">
-                                                getblocksysfee
-                                            </option>
-                                            <option title=": Gets the current number of connections for the node">
-                                                getconnectioncount
-                                            </option>
-                                            <option
-                                                title="<script_hash>: 	Returns information about the contract based on the specified script hash">
-                                                getcontractstate
-                                            </option>
-                                            <option title=": Create a new address (Need to open the wallet)">
-                                                getnewaddress
-                                            </option>
-                                            <option
-                                                title="<number_of_blocks> <height_to_end (optional)> Return block timestamps (Need to enable CoreMetrics plugin)">
-                                                getmetricblocktimestamp
-                                            </option>
-                                            <option title=": Get a list of unconfirmed transactions in memory">
-                                                getrawmempool
-                                            </option>
-                                            <option
-                                                title="<txid> [verbose=0]: 	Returns the corresponding transaction information based on the specified hash value">
-                                                getrawtransaction
-                                            </option>
-                                            <option
-                                                title="<script_hash> <key>: 	Returns the stored value based on the contract script hash and key">
-                                                getstorage
-                                            </option>
-                                            <option
-                                                title="<txid>: 	Returns the corresponding transaction height information based on the specified txid">
-                                                gettransactionheight
-                                            </option>
-                                            <option
-                                                title=": Get a list of nodes that are currently connected/disconnected by this node">
-                                                getpeers
-                                            </option>
-                                            <option
-                                                title=": Returns the current NEO consensus nodes information and voting status.">
-                                                getnextblockvalidators
-                                            </option>
-                                            <option title=": Get committee.">getcommittee</option>
-                                            <option title=": Get version information of this node">getversion
-                                            </option>
-                                            <option
-                                                title="<script_hash> <params>:	Invokes a smart contract at specified script hash with the given parameters">
-                                                invoke
-                                            </option>
-                                            <option
-                                                title="<script_hash> <operation> <params>:	Invokes a smart contract at specified script hash, passing in an operation and its params">
-                                                invokefunction
-                                            </option>
-                                            <option
-                                                title="<script>: 	Runs a script through the virtual machine and returns the results">
-                                                invokescript
-                                            </option>
-                                            <option
-                                                title=": Lists all the addresses in the current wallet (Need to open the wallet)">
-                                                listaddress
-                                            </option>
-                                            <option title=": Lists all the plugins loaded in the RPC node">
-                                                listplugins
-                                            </option>
-                                            <option
-                                                title="<hex>: 	Broadcast a transaction over the network. See the network protocol documentation.">
-                                                sendrawtransaction
-                                            </option>
-                                            <option
-                                                title="<asset_id> <address> <value> [fee=0]: 	Transfer to specified address (Need to open the wallet)">
-                                                sendtoaddress
-                                            </option>
-                                            <option
-                                                title="<outputs_array> [fee=0] [change_address]: 	Bulk transfer order (Need to open the wallet)">
-                                                sendmany
-                                            </option>
-                                            <option title="<hex>: 	Submit new blocks (Needs to be a consensus node)">
-                                                submitblock
-                                            </option>
-                                            <option title="<address>:	Verify that the address is a correct NEO address">
-                                                validateaddress
-                                            </option>
-                                            <option title=": Get state height">getstateheight</option>
-                                            <option title="<index>:	Get state root from a specific height">
-                                                getstateroot
-                                            </option>
-                                            <option title="<state_root,script_hash>: 	Get proof">getproof
-                                            </option>
-                                            <option title="<state_root>: 	Verify Proof">verifyproof</option>
-                                            <option title=": create your invoke function manually!"></option>
-                                        </select>
-                                    </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="rpcMethod">
+                                        Method (view <a href="https://docs.neo.org/en-us/node/cli/apigen.html"
+                                            target="_blank">Official API</a> or put cursor on top for
+                                        tooltip)</label>
+                                    <select name="rpcMethod" id="rpcMethod" class="form-select" onchange="frmRPCJson()">
+                                        <option title="select">Select a method</option>
+                                        <option title=":Gets the number of blocks in the main chain">
+                                            getblockcount
+                                        </option>
+                                        <option title="<script_hash> :	Get Balance of Nep17">
+                                            getnep17balances
+                                        </option>
+                                        <option
+                                            title="<address> :	Export the private key of the specified address (Need to open the wallet)">
+                                            dumpprivkey
+                                        </option>
+                                        <option
+                                            title="<address> :	Check account asset information according to account address">
+                                            getaccountstate
+                                        </option>
+                                        <option
+                                            title="<txid>[verbose=0]: Returns the contract log based on the specified txid (Need to enable logging plugin)">
+                                            getapplicationlog
+                                        </option>
+                                        <option
+                                            title="<asset_id> :	Query asset information according to the specified asset number">
+                                            getassetstate
+                                        </option>
+                                        <option
+                                            title="<asset_id> : Returns the balance of the corresponding asset in the wallet according to the specified asset number (Need to open the wallet)">
+                                            getbalance
+                                        </option>
+                                        <option title=": Gets the hash of the tallest block in the main chain">
+                                            getbestblockhash
+                                        </option>
+                                        <option
+                                            title="<hash> [verbose=0]:	Returns the corresponding block information according to the specified hash value">
+                                            getblock
+                                        </option>
+                                        <option
+                                            title="<index> [verbose=0]: 	Returns the corresponding block information according to the specified index">
+                                            getblock
+                                        </option>
+                                        <option
+                                            title="<index>: 	Returns the hash value of the corresponding block based on the specified index">
+                                            getblockhash
+                                        </option>
+                                        <option title="<index>:[verbose=0] 	Returns header">GetBlockHeader
+                                        </option>
+                                        <option
+                                            title="<index>: 	Returns the system fees before the block according to the specified index">
+                                            getblocksysfee
+                                        </option>
+                                        <option title=": Gets the current number of connections for the node">
+                                            getconnectioncount
+                                        </option>
+                                        <option
+                                            title="<script_hash>: 	Returns information about the contract based on the specified script hash">
+                                            getcontractstate
+                                        </option>
+                                        <option title=": Create a new address (Need to open the wallet)">
+                                            getnewaddress
+                                        </option>
+                                        <option
+                                            title="<number_of_blocks> <height_to_end (optional)> Return block timestamps (Need to enable CoreMetrics plugin)">
+                                            getmetricblocktimestamp
+                                        </option>
+                                        <option title=": Get a list of unconfirmed transactions in memory">
+                                            getrawmempool
+                                        </option>
+                                        <option
+                                            title="<txid> [verbose=0]: 	Returns the corresponding transaction information based on the specified hash value">
+                                            getrawtransaction
+                                        </option>
+                                        <option
+                                            title="<script_hash> <key>: 	Returns the stored value based on the contract script hash and key">
+                                            getstorage
+                                        </option>
+                                        <option
+                                            title="<txid>: 	Returns the corresponding transaction height information based on the specified txid">
+                                            gettransactionheight
+                                        </option>
+                                        <option
+                                            title=": Get a list of nodes that are currently connected/disconnected by this node">
+                                            getpeers
+                                        </option>
+                                        <option
+                                            title=": Returns the current NEO consensus nodes information and voting status.">
+                                            getnextblockvalidators
+                                        </option>
+                                        <option title=": Get committee.">getcommittee</option>
+                                        <option title=": Get version information of this node">getversion
+                                        </option>
+                                        <option
+                                            title="<script_hash> <params>:	Invokes a smart contract at specified script hash with the given parameters">
+                                            invoke
+                                        </option>
+                                        <option
+                                            title="<script_hash> <operation> <params>:	Invokes a smart contract at specified script hash, passing in an operation and its params">
+                                            invokefunction
+                                        </option>
+                                        <option
+                                            title="<script>: 	Runs a script through the virtual machine and returns the results">
+                                            invokescript
+                                        </option>
+                                        <option
+                                            title=": Lists all the addresses in the current wallet (Need to open the wallet)">
+                                            listaddress
+                                        </option>
+                                        <option title=": Lists all the plugins loaded in the RPC node">
+                                            listplugins
+                                        </option>
+                                        <option
+                                            title="<hex>: 	Broadcast a transaction over the network. See the network protocol documentation.">
+                                            sendrawtransaction
+                                        </option>
+                                        <option
+                                            title="<asset_id> <address> <value> [fee=0]: 	Transfer to specified address (Need to open the wallet)">
+                                            sendtoaddress
+                                        </option>
+                                        <option
+                                            title="<outputs_array> [fee=0] [change_address]: 	Bulk transfer order (Need to open the wallet)">
+                                            sendmany
+                                        </option>
+                                        <option title="<hex>: 	Submit new blocks (Needs to be a consensus node)">
+                                            submitblock
+                                        </option>
+                                        <option title="<address>:	Verify that the address is a correct NEO address">
+                                            validateaddress
+                                        </option>
+                                        <option title=": Get state height">getstateheight</option>
+                                        <option title="<index>:	Get state root from a specific height">
+                                            getstateroot
+                                        </option>
+                                        <option title="<state_root,script_hash>: 	Get proof">getproof
+                                        </option>
+                                        <option title="<state_root>: 	Verify Proof">verifyproof</option>
+                                        <option title=": create your invoke function manually!"></option>
+                                    </select>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <label for="txtRPCJson">Insert RPC Json</label>
-                                    <input id="txtRPCJson" name="contracthash" class="form-control"
-                                        placeholder="RPC Json Model">
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <label for="txtRPCJson">Insert RPC Json</label>
+                                <input id="txtRPCJson" name="contracthash" class="form-control"
+                                    placeholder="RPC Json Model">
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <button onclick="rawRpcCall()" id="btnCallJsonRPC" style="width: 100%"
-                                        class="btn btn-default btn-1"><i class="fas fa-phone"></i> Invoke
-                                        RPC</button>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <button onclick="rawRpcCall()" id="btnCallJsonRPC" style="width: 100%"
+                                    class="btn btn-default btn-1"><i class="fas fa-phone"></i> Invoke
+                                    RPC</button>
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <textarea id="txtRPCJsonOut" rows="10" class="form-control"></textarea>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <textarea id="txtRPCJsonOut" rows="10" class="form-control"></textarea>
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <button type="button" style="width: 100%" class="btn btn-default btn-1"
-                                        onclick="convertJsonNotifications()"><i class="fas fa-exchange-alt"></i>
-                                        Get Notifications</button>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <button type="button" style="width: 100%" class="btn btn-default btn-1"
+                                    onclick="convertJsonNotifications()"><i class="fas fa-exchange-alt"></i>
+                                    Get Notifications</button>
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="collapse col-md-12" id="collapseNotifications">
-                                    <textarea id="txt_notifications"
-                                        style="margin-left: 5px; margin-bottom: 20px; margin-top: 5px;background: #00AF92;color: white!important;border:none;resize: none;outline: none;width: 100%;"
-                                        readonly="readonly" rows="6"
-                                        placeholder="Notifications/Events are listed here."></textarea>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="collapse col-md-12" id="collapseNotifications">
+                                <textarea id="txt_notifications"
+                                    style="margin-left: 5px; margin-bottom: 20px; margin-top: 5px;background: #00AF92;color: white!important;border:none;resize: none;outline: none;width: 100%;"
+                                    readonly="readonly" rows="6"
+                                    placeholder="Notifications/Events are listed here."></textarea>
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <label for="tableSigners">Signers</label>
-                                    <table id="tableSigners" class="table text-white twalllet">
-                                    </table>
-                                </div>
+                        <div class="row mb-2">
+                            <label for="tableSigners">Signers</label>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="tableSigners" class="table text-white twalllet">
+                            </table>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label for="net_fee">Network Fees</label>
+                                <input type="number" id="net_fee" step="0.00000001" size="10" value="0"
+                                    class="form-control" required="">
                             </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-4">
-                                    <label for="net_fee">Network Fees</label>
-                                    <input type="number" id="net_fee" step="0.00000001" size="10" value="0"
-                                        class="form-control" required="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="sys_fee">System Fees</label>
-                                    <input type="number" id="sys_fee" step="0.00000001" size="10" value="0"
-                                        class="form-control" required="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="valid_until">Valid Until</label>
-                                    <input type="number" id="valid_until" step="1" size="10" value="0"
-                                        class="form-control" required="">
-                                </div>
+                            <div class="col-md-4">
+                                <label for="sys_fee">System Fees</label>
+                                <input type="number" id="sys_fee" step="0.00000001" size="10" value="0"
+                                    class="form-control" required="">
                             </div>
-
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <label for="tx_script">Script</label>
-                                    <textarea id="tx_script" rows="2" cols="100" placeholder="Transaction Script"
-                                        style="background: none;border: none;resize: none;outline: none;color: #0aab7b!important;"></textarea>
-                                </div>
+                            <div class="col-md-4">
+                                <label for="valid_until">Valid Until</label>
+                                <input type="number" id="valid_until" step="1" size="10" value="0" class="form-control"
+                                    required="">
                             </div>
+                        </div>
 
-                            <div class="row mb-2">
-                                <div class="col-md-12">
-                                    <button type="button" id="relay_btn" style="width: 100%"
-                                        class="btn btn-default btn-1 btn-1-darker" onclick="signAndRelay(false)">
-                                        <i class="fa-solid fa-signature"></i> Sign and Relay to Blockchain
-                                    </button>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <label for="tx_script">Script</label>
+                                <textarea id="tx_script" rows="2" cols="100" placeholder="Transaction Script"
+                                    style="background: none;border: none;resize: none;outline: none;color: #0aab7b!important;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <button type="button" id="relay_btn" style="width: 100%"
+                                    class="btn btn-default btn-1 btn-1-darker" onclick="signAndRelay(false)">
+                                    <i class="fa-solid fa-signature"></i> Sign and Relay to Blockchain
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -755,11 +745,9 @@
                     <div class="standardContainer">
                         <h4 class="green-title">Historical Relayed TX's <button type="submit" onclick="drawRelayedTXs()"
                                 class="btn btn-info btn-sm"><i class="fas fa-sync-alt"></i></button></h4>
-                        <div class="container">
-                            <div class="row" style="padding:0 20px 0 20px;">
-                                <table id="tableRelayedTxs" class="table text-white twalllet">
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table id="tableRelayedTxs" class="table text-white twalllet">
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -768,7 +756,6 @@
                     <div class="standardContainer">
                         <h4 class="green-title">Blocks <button type="submit" onclick="drawBlocks()"
                                 class="btn btn-info btn-sm"><i class="fas fa-sync-alt"></i></button>
-
 
                             <div class="input-group" style="margin-top: 3px;">
                                 <input id="search_blockchain"
@@ -782,42 +769,40 @@
                                 <div class="progress-bar-striped bg-success" role="progressbar"
                                     aria-label="Success example" style="background-color:#00AF92!important; width: 100%"
                                     aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" id="progressBarBlocks">
+                                    100%
+                                    complete
                                 </div>
-                                <small id="progressBarBlocksText" style="color: black;"
-                                    class="justify-content-center d-flex position-absolute w-100">100%
-                                    complete</small>
+                                <!--<small id="progressBarBlocksText" style="color: black;"
+                                    class="justify-content-center d-flex position-absolute w-100"></small>-->
                             </div>
                         </h4>
 
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="blocks_end_get">Last</label>
-                                        <input id="blocks_end_get" class="form-control" value="">
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="blocks_end_get">Last</label>
+                                    <input id="blocks_end_get" class="form-control" value="">
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="blocks_count_get">Count</label>
-                                        <input id="blocks_count_get" class="form-control" value="">
-                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="blocks_count_get">Count</label>
+                                    <input id="blocks_count_get" class="form-control" value="">
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group form-check form-switch">
-                                        <label for="blocks_count_get_min_tx">Min. Txs.</label>
-                                        <input id="blocks_count_get_min_tx" class="form-control" value="0">
-                                    </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group form-check form-switch">
+                                    <label for="blocks_count_get_min_tx">Min. Txs.</label>
+                                    <input id="blocks_count_get_min_tx" class="form-control" value="0">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="container">
-                            <div class="row" style="padding:0 20px 0 20px;">
-                                <table id="tableBlocks" class="table text-white twalllet">
-                                </table>
-                            </div>
+                        <div class="table-responsive">
+                            <table id="tableBlocks" class="table text-white twalllet">
+                            </table>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -833,14 +818,16 @@
                 </nav>
 
                 <div class="generalContainer">
-                    <div class="standardContainer">
-                        <h4 class="green-title">Wallet <button type="submit" onclick="populateAllWalletData()"
-                                class="btn btn-info btn-sm"><i class="fas fa-sync-alt"></i></button></h4>
-                        <div class="container">
-                            <div class="row" style="padding:0 20px 0 20px;">
-                                <table id="tableWalletStatus" class="table text-white twalllet">
-                                </table>
-                            </div>
+                    <div class="standardContainer" style="padding:0">
+                        <h4 class="green-title">Wallet
+                            <button type="submit" onclick="populateAllWalletData()" class="btn btn-info btn-sm">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </h4>
+
+                        <div class="table-responsive">
+                            <table id="tableWalletStatus" class="table text-white twalllet">
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -849,43 +836,42 @@
                     <div class="standardContainer">
                         <h4 class="green-title">Transfer NEP17 Tokens
                         </h4>
-                        <div class="container">
-                            <div class="row mb-2">
-                                <div class="col align-self-center text-center">
-                                    <label id="labelForTransferAmount" style="font-size: 20px!important;">
-                                        Transferring ?</label>
-                                    <label id="labelForTransferAsset" style="font-size: 20px!important;"></label>
-                                    <label id="labelForTransferFrom" style="font-size: 20px!important;"></label>
-                                    <label id="labelForTransferTo" style="font-size: 20px!important;">To</label>
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col align-self-center text-center">
+                                <label id="labelForTransferAmount" style="font-size: 20px!important;">
+                                    Transferring ?</label>
+                                <label id="labelForTransferAsset" style="font-size: 20px!important;"></label>
+                                <label id="labelForTransferFrom" style="font-size: 20px!important;"></label>
+                                <label id="labelForTransferTo" style="font-size: 20px!important;">To</label>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <select name="createtx_to" onchange="fillTransferToLabel()" id="createtx_to"
-                                        class="form-select" size="3"></select>
-                                </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <select name="createtx_to" onchange="fillTransferToLabel()" id="createtx_to"
+                                    class="form-select" size="3"></select>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-6">
-                                    <select class="form-select" id="nep17_asset"
-                                        onchange="updateTransferAssetInfo()"></select>
-                                </div>
-                                <div class="col-3">
-                                    <input type="range" onchange="updateTransferAmountInfoFromPercentage()"
-                                        id="transfer_nep17_amount_range" value="0" min="0" max="100" />
-                                </div>
-                                <div class="col-3">
-                                    <input type="number" class="form-control" onchange="updateTransferAmountInfo()"
-                                        id="transfer_nep17_amount" value="0" min="0"></input>
-                                </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <select class="form-select" id="nep17_asset"
+                                    onchange="updateTransferAssetInfo()"></select>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-12">
-                                    <button type="button" onclick="createNep17Tx()" id="txcreate" style="width: 100%"
-                                        class="btn btn-default btn-1">
-                                        <i class="fa-solid fa-money-bill-transfer"></i> Create Transfer
-                                    </button>
-                                </div>
+                            <div class="col-3">
+                                <input class="form-control" type="range" id="transfer_nep17_amount_range" value="0"
+                                    min="0" max="100" oninput="updateTransferAmountInfoFromPercentage()"
+                                    onchange="updateTransferAmountInfoFromPercentage()" />
+                            </div>
+                            <div class="col-3">
+                                <input type="number" class="form-control" onchange="updateTransferAmountInfo()"
+                                    id="transfer_nep17_amount" value="0" min="0"></input>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <button type="button" onclick="createNep17Tx()" id="txcreate" style="width: 100%"
+                                    class="btn btn-default btn-1">
+                                    <i class="fa-solid fa-money-bill-transfer"></i> Create Transfer
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -897,35 +883,30 @@
                             <button type="button" onclick="addWalletFromForm();" id="btnNewWallet"
                                 class="btn btn-success btn-sm"><i class="fas fa-user-plus"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row mb-2">
-                                <div class="col-6 col-md-4">
-                                    <select id="type_to_register" class="form-select">
-                                        <option value="address">Address (17 bytes) - WatchOnly </option>
-                                        <option value="scripthash">ScriptHash (20 bytes) - WatchOnly
-                                        </option>
-                                        <option value="publickey">PublicKey (33 bytes)</option>
-                                        <option value="wif">WIF (26 bytes)</option>
-                                        <option value="privatekey">PrivateKey (32 bytes)</option>
-                                        <option value="encryptedkey">EncryptedKey (29 bytes)</option>
-                                        <option value="multisig">MultiSig Verification (?bytes)</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-6 col-md-4">
-                                    <input class="form-control" placeholder="Key" type="text" id="accountToAddInfo"
-                                        maxlength="64" value="" size="20">
-                                </div>
-
-                                <div class="col-6 col-md-4">
-                                    <input class="form-control" placeholder="Account label" type="text"
-                                        id="accountLabelToAddInfo" value="" size="20">
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-6 col-md-4">
+                                <select id="type_to_register" class="form-select">
+                                    <option value="address">Address (17 bytes) - WatchOnly </option>
+                                    <option value="scripthash">ScriptHash (20 bytes) - WatchOnly
+                                    </option>
+                                    <option value="publickey">PublicKey (33 bytes)</option>
+                                    <option value="wif">WIF (26 bytes)</option>
+                                    <option value="privatekey">PrivateKey (32 bytes)</option>
+                                    <option value="encryptedkey">EncryptedKey (29 bytes)</option>
+                                    <option value="multisig">MultiSig Verification (?bytes)</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <input class="form-control" placeholder="Key" type="text" id="accountToAddInfo"
+                                    maxlength="64" value="" size="20">
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <input class="form-control" placeholder="Account label" type="text"
+                                    id="accountLabelToAddInfo" value="" size="20">
                             </div>
                         </div>
                     </div>
                 </div>
-                <br><br>
             </div>
 
 
@@ -941,229 +922,177 @@
 
 
                 <div class="generalContainer">
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">String
                             <-> Hex
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <form id="str2hash" class="ng-pristine ng-valid">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label for="strhex_str">String</label>
-                                                    <input id="strhex_str" oninput="str2hex()" class="form-control"
-                                                        placeholder="String" oninput="str2hex()">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label for="strhex_hex">Hex</label>
-                                                    <input id="strhex_hex" oninput="hex2str()" class="form-control"
-                                                        placeholder="Hex" oninput="hex2str()">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="form-group">
-                                                    <label for="hex_length">Length (in bytes)</label>
-                                                    <input id="hex_length" class="form-control"
-                                                        placeholder="Length (in bytes)">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="strhex_str">String</label>
+                                    <input id="strhex_str" oninput="str2hex()" class="form-control" placeholder="String"
+                                        oninput="str2hex()">
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="strhex_hex">Hex</label>
+                                    <input id="strhex_hex" oninput="hex2str()" class="form-control" placeholder="Hex"
+                                        oninput="hex2str()">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="hex_length">Length (in bytes)</label>
+                                    <input id="hex_length" class="form-control" placeholder="Length (in bytes)">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">Hex
                             <-> xeH
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="hexxeh_hex">Hex</label>
-                                                <input id="hexxeh_hex" oninput="hex2xeh()" class="form-control"
-                                                    placeholder="Hex" oninput="hex2xeh()">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="hexxeh_xeh">xeH</label>
-                                                <input id="hexxeh_xeh" oninput="xeh2hex()" class="form-control"
-                                                    placeholder="xeH" oninput="xeh2hex()">
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hexxeh_hex">Hex</label>
+                                    <input id="hexxeh_hex" oninput="hex2xeh()" class="form-control" placeholder="Hex"
+                                        oninput="hex2xeh()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="hexxeh_xeh">xeH</label>
+                                    <input id="hexxeh_xeh" oninput="xeh2hex()" class="form-control" placeholder="xeH"
+                                        oninput="xeh2hex()">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">Base64
                             <-> Hex
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="b64hx_base64_hex">Base64</label>
-                                                <input id="b64hx_base64_hex" oninput="b64hx()" class="form-control"
-                                                    placeholder="Base64">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="b64hx_hex_base64">Hex</label>
-                                                <input id="b64hx_hex_base64" oninput="hxb64()" class="form-control"
-                                                    placeholder="Hex">
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="b64hx_base64_hex">Base64</label>
+                                    <input id="b64hx_base64_hex" oninput="b64hx()" class="form-control"
+                                        placeholder="Base64">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="b64hx_hex_base64">Hex</label>
+                                    <input id="b64hx_hex_base64" oninput="hxb64()" class="form-control"
+                                        placeholder="Hex">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">Number
                             <-> Fixed8 Hex
                         </h4>
-                        <div class="container">
-                            <div class="row">
-
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="fx8_number">Number</label>
-                                                <input type="number" oninput="num2fixed8()" id="fx8_number"
-                                                    class="form-control" placeholder="Number" oninput="num2fixed8()">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="fx8_hex">Fixed8</label>
-                                                <input id="fx8_hex" oninput="fixed82num()" class="form-control"
-                                                    placeholder="Fixed8 hex" oninput="fixed82num()">
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fx8_number">Number</label>
+                                    <input type="number" oninput="num2fixed8()" id="fx8_number" class="form-control"
+                                        placeholder="Number" oninput="num2fixed8()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fx8_hex">Fixed8</label>
+                                    <input id="fx8_hex" oninput="fixed82num()" class="form-control"
+                                        placeholder="Fixed8 hex" oninput="fixed82num()">
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">Address
                             <-> ScriptHash (big endian)
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="address_conversor">Address</label>
-                                                <input id="address_conversor" oninput="address2scripthash()"
-                                                    class="form-control" placeholder="Address"
-                                                    oninput="address2scripthash()">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="scripthash_conversor">ScriptHash (big endian, should
-                                                    start
-                                                    with 0x)</label>
-                                                <input id="scripthash_conversor" oninput="scripthash2address()"
-                                                    class="form-control" placeholder="ScriptHash"
-                                                    oninput="scripthash2address()">
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address_conversor">Address</label>
+                                    <input id="address_conversor" oninput="address2scripthash()" class="form-control"
+                                        placeholder="Address" oninput="address2scripthash()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="scripthash_conversor">ScriptHash (big endian, should
+                                        start
+                                        with 0x)</label>
+                                    <input id="scripthash_conversor" oninput="scripthash2address()" class="form-control"
+                                        placeholder="ScriptHash" oninput="scripthash2address()">
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">BigInteger
                             <-> Little-Endian ByteArray
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="convert_bigint">BigInteger</label>
-                                                <input id="convert_bigint" class="form-control" placeholder="BigInteger"
-                                                    oninput="conv_bigint2lebytearray()">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="convert_bytearray">Little-Endian
-                                                    ByteArray</label>
-                                                <input id="convert_bytearray" class="form-control"
-                                                    placeholder="Little Endian ByteArray"
-                                                    oninput="conv_lebytearray2bigint()">
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="convert_bigint">BigInteger</label>
+                                    <input id="convert_bigint" class="form-control" placeholder="BigInteger"
+                                        oninput="conv_bigint2lebytearray()">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="convert_bytearray">Little-Endian
+                                        ByteArray</label>
+                                    <input id="convert_bytearray" class="form-control"
+                                        placeholder="Little Endian ByteArray" oninput="conv_lebytearray2bigint()">
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
-                    <div class="standardContainer" style="height: 130px;">
+                    <div class="standardContainer">
                         <h4 class="green-title">Hex String -> Hash</h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="convert_string_hash">Hex String</label>
-                                                <input id="convert_string_hash" class="form-control"
-                                                    placeholder="Input String to Hash" oninput="conv_string_hash()">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="convert_string_hash160"
-                                                    title="Scripthash little endian format">Hash160</label>
-                                                <input id="convert_string_hash160" class="form-control"
-                                                    placeholder="Hash160 (Sha256+Ripemd160)" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="convert_string_sha256">Hex Sha256</label>
-                                                <input id="convert_string_sha256" class="form-control"
-                                                    placeholder="Sha256" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="convert_string_hash256">Hash256</label>
-                                                <input id="convert_string_hash256" class="form-control"
-                                                    placeholder="Hash256 (Sha256+Sha256)" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="convert_string_hash">Hex String</label>
+                                    <input id="convert_string_hash" class="form-control"
+                                        placeholder="Input String to Hash" oninput="conv_string_hash()">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="convert_string_hash160"
+                                        title="Scripthash little endian format">Hash160</label>
+                                    <input id="convert_string_hash160" class="form-control"
+                                        placeholder="Hash160 (Sha256+Ripemd160)" readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="convert_string_sha256">Hex Sha256</label>
+                                    <input id="convert_string_sha256" class="form-control" placeholder="Sha256"
+                                        readonly>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="convert_string_hash256">Hash256</label>
+                                    <input id="convert_string_hash256" class="form-control"
+                                        placeholder="Hash256 (Sha256+Sha256)" readonly>
                                 </div>
                             </div>
                         </div>
@@ -1226,59 +1155,50 @@
                                 </i>
                             </button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="height_filter_log">Height</label>
-                                                <input id="height_filter_log" class="form-control" value="1">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="lines_filter_log">Number Lines</label>
-                                                <input id="lines_filter_log" class="form-control" value="10">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label for="year_filter_log">Year</label>
-                                                <input id="year_filter_log" class="form-control" value=""
-                                                    placeholder="2022">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <div class="form-group">
-                                                <label for="day_filter_log">Day</label>
-                                                <input id="day_filter_log" class="form-control" value=""
-                                                    placeholder="01">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <div class="form-group">
-                                                <label for="month_filter_log">Month</label>
-                                                <input id="month_filter_log" class="form-control" value=""
-                                                    placeholder="12">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="select_log_filter">Search All</label>
-                                                <select id="searchNodeStatusFilter" onchange="getAllFilteredNodeInfo()"
-                                                    title="Select network" class="form-select"
-                                                    style="text-align: center!important;">
-                                                    <option selected disabled>Select filter</option>
-                                                    <option>OnStop</option>
-                                                    <option>OnStart</option>
-                                                    <option>Error</option>
-                                                    <option>null</option>
-                                                    <!--<option disabled>MainNet</option>-->
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="height_filter_log">Height</label>
+                                    <input id="height_filter_log" class="form-control" value="1">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="lines_filter_log">Number Lines</label>
+                                    <input id="lines_filter_log" class="form-control" value="10">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="year_filter_log">Year</label>
+                                    <input id="year_filter_log" class="form-control" value="" placeholder="2022">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="day_filter_log">Day</label>
+                                    <input id="day_filter_log" class="form-control" value="" placeholder="01">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="month_filter_log">Month</label>
+                                    <input id="month_filter_log" class="form-control" value="" placeholder="12">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="select_log_filter">Search All</label>
+                                    <select id="searchNodeStatusFilter" onchange="getAllFilteredNodeInfo()"
+                                        title="Select network" class="form-select"
+                                        style="text-align: center!important;">
+                                        <option selected disabled>Select filter</option>
+                                        <option>OnStop</option>
+                                        <option>OnStart</option>
+                                        <option>Error</option>
+                                        <option>null</option>
+                                        <!--<option disabled>MainNet</option>-->
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -1289,34 +1209,23 @@
                             <button type="submit" onclick="getNodeInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="col-md-12">
-                                        <textarea id="node1data" class="form-control" style="font-size: 12px;" rows="15"
-                                            readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="node1data" class="form-control" style="font-size: 12px;" rows="15"
+                                    readonly=""></textarea>
                             </div>
                         </div>
                     </div>
-
 
                     <div class="standardContainer">
                         <h4 class="green-title">Node2
                             <button type="submit" onclick="getNodeInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="node2data" class="form-control" style="font-size: 12px;" rows="15"
-                                            readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="node2data" class="form-control" style="font-size: 12px;" rows="15"
+                                    readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1326,16 +1235,10 @@
                             <button type="submit" onclick="getNodeInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="node3data" class="form-control" style="font-size: 12px;" rows="15"
-                                            readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="node3data" class="form-control" style="font-size: 12px;" rows="15"
+                                    readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1345,16 +1248,10 @@
                             <button type="submit" onclick="getNodeInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="node4data" class="form-control" style="font-size: 12px;" rows="15"
-                                            readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="node4data" class="form-control" style="font-size: 12px;" rows="15"
+                                    readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1364,15 +1261,10 @@
                             <button type="submit" onclick="getNodeInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="noderpcdata" class="form-control" style="font-size: 12px;"
-                                            rows="15" readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="noderpcdata" class="form-control" style="font-size: 12px;" rows="15"
+                                    readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1384,15 +1276,10 @@
                             <button type="submit" onclick="setRole(8)" class="btn btn-danger btn-sm">Elect
                                 Oracle <i class="fas fa-vote-yea"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="oracleservicedata" class="form-control" style="font-size: 12px;"
-                                            rows="15" readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="oracleservicedata" class="form-control" style="font-size: 12px;" rows="15"
+                                    readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1402,15 +1289,10 @@
                             <button type="submit" onclick="getOracleInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="oraclehttpsprotocoldata" class="form-control"
-                                            style="font-size: 12px;" rows="15" readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="oraclehttpsprotocoldata" class="form-control" style="font-size: 12px;"
+                                    rows="15" readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1422,15 +1304,10 @@
                             <button type="submit" onclick="setRole(4)" class="btn btn-danger btn-sm">Elect
                                 StateService <i class="fas fa-vote-yea"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-
-                                    <div class="col-md-12">
-                                        <textarea id="verificationservicedata" class="form-control"
-                                            style="font-size: 12px;" rows="15" readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="verificationservicedata" class="form-control" style="font-size: 12px;"
+                                    rows="15" readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1440,14 +1317,10 @@
                             <button type="submit" onclick="getStateInfo()" class="btn btn-info btn-sm"><i
                                     class="fas fa-sync-alt"></i></button>
                         </h4>
-                        <div class="container">
-                            <div class="row">
-                                <div class="container">
-                                    <div class="col-md-12">
-                                        <textarea id="verificationcontextdata" class="form-control"
-                                            style="font-size: 12px;" rows="15" readonly=""></textarea>
-                                    </div>
-                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <textarea id="verificationcontextdata" class="form-control" style="font-size: 12px;"
+                                    rows="15" readonly=""></textarea>
                             </div>
                         </div>
                     </div>
@@ -1471,27 +1344,26 @@
                             RPC
                         </h4>
 
-                        <div class="container">
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <button type="button" id="btnAddNode" style="width: 100%;" onClick="addNewRPCNode()"
-                                        class="btn btn-success btn-1">
-                                        <i class="fa-solid fa-plus"></i> Add RPC Node
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <input id="newnode_url" class="form-control"
-                                        placeholder="New RPC Node (https://node.to.add)" style="width: 100%;">
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <button type="button" id="btnAddNode" style="width: 100%;" onClick="addNewRPCNode()"
+                                    class="btn btn-success btn-1">
+                                    <i class="fa-solid fa-plus"></i> Add RPC Node
+                                </button>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <select id="rpc_nodes_list" name="rpc_nodes" onchange="changeRPCHeaderURL()"
-                                        class="form-select checkedOption" size="3"
-                                        style="text-align: center!important;font-weight: bold!important;"></select>
-                                </div>
+                            <div class="col-md-6">
+                                <input id="newnode_url" class="form-control"
+                                    placeholder="New RPC Node (https://node.to.add)" style="width: 100%;">
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <select id="rpc_nodes_list" name="rpc_nodes" onchange="changeRPCHeaderURL()"
+                                    class="form-select checkedOption" size="3"
+                                    style="text-align: center!important;font-weight: bold!important;"></select>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -1500,30 +1372,29 @@
                         <h4 class="green-title">
                             Compiler Service
                         </h4>
-                        <div class="container">
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <button type="button" id="btnAddCompilationService" style="width: 100%;"
-                                        onClick="addNewCompilationService()" class="btn btn-success btn-1">
-                                        <i class="fa-solid fa-plus"></i> Add Compilation Service
-                                    </button>
-                                </div>
-                                <div class="col-md-6">
-                                    <input id="newCompilation_url" class="form-control"
-                                        placeholder="New Compilation Service (https://compilerServer.to.add)"
-                                        style="width: 100%;">
-                                </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <button type="button" id="btnAddCompilationService" style="width: 100%;"
+                                    onClick="addNewCompilationService()" class="btn btn-success btn-1">
+                                    <i class="fa-solid fa-plus"></i> Add Compilation Service
+                                </button>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-md-6">
-                                    <select class="form-select checkedOption"
-                                        style="text-align: center!important;font-weight: bold!important;"
-                                        id="compiler_list" onchange="changeBasePathCompilers()" size="2">
-                                    </select>
-
-                                </div>
+                            <div class="col-md-6">
+                                <input id="newCompilation_url" class="form-control"
+                                    placeholder="New Compilation Service (https://compilerServer.to.add)"
+                                    style="width: 100%;">
                             </div>
                         </div>
+                        <div class="row mb-2">
+                            <div class="col-md-6">
+                                <select class="form-select checkedOption"
+                                    style="text-align: center!important;font-weight: bold!important;" id="compiler_list"
+                                    onchange="changeBasePathCompilers()" size="2">
+                                </select>
+
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
